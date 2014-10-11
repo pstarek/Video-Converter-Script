@@ -1,4 +1,4 @@
 Video-Converter-Script
 ======================
 
-BASH scripts for converting m2t transport streams to XVID AVI files using ffmpeg tools.
+BASH script for converting m2t transport streams to DivX AVI files using ffmpeg tools.
