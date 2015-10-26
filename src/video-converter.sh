@@ -50,10 +50,10 @@ if [ ! $2 ]; then
   printf "\n"
   case "$aspect" in
     16:9)
-      ssize=640x368
+      ssize=640x360
       ;;
     4:3)
-      ssize=630x504
+      ssize=640x480
       ;;
   esac
 fi
