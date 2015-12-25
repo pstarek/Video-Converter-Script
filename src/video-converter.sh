@@ -67,7 +67,7 @@ aviout="$filenamewithoutext$aviext"
 if [ ! -f "$mpgout" ]; then
   echo "Stage 1 (to MPG), processing file: $filename to $mpgout"
   printf "\n"
-  ffmpeg -y -i "$filename" -vcodec copy -acodec copy "$mpgout"
+  ffmpeg -y -i "$filename" -aspect $aspect -target pal-dvd -vcodec copy -acodec copy "$mpgout"
   sync
   printf "\n"
 fi
