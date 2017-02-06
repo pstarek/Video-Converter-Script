@@ -1,16 +1,11 @@
 #!/bin/bash
 
-#progname=`basename $0`
+# This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License. For more information see:
+# http://creativecommons.org/licenses/by-sa/4.0/
+# Author: Pavel Stárek, pstarek(at)gmail.com
+
 progname=$(basename $0)
 videobitrate=1331200
-
-# for 16:9 TV capturing
-# aspect=16:9
-# ssize=640x360
-
-# for 4:3 TV capturing
-# aspect=4:3
-# ssize=640x480
 
 # If none command line arguments are given, or if -h is given as first argument, show some help
 if [[ $1 == "" || $1 == "-h" ]]; then
@@ -59,27 +54,9 @@ if [ ! $2 ]; then
 fi
 
 filenamewithoutext="${filename%%.*}"
-
-mpgext=".mpg"
 aviext=".avi"
-mpgout="$filenamewithoutext$mpgext"
 aviout="$filenamewithoutext$aviext"
-#if [ ! -f "$mpgout" ]; then
-#  echo "Stage 1 (to PAL-DVD MPG), processing file: $filename to $mpgout"
-#  printf "\n"
-  #ffmpeg -y -i "$filename" -target pal-dvd -g 15 -b 6000000 -maxrate 9000000 -minrate 0 -bufsize 1835008 -packetsize 2048 -muxrate 10080000 -b:a 448000 -aspect $aspect -s 720x576 -b 5000k -b:a 320k -y -mbd rd -trellis 2 -cmp 2 -subcmp 2 -threads 2 "$mpgout"
-#  ffmpeg -y -i "$filename" -aspect $aspect -target pal-dvd -vcodec copy -acodec copy "$mpgout"
-#  sync
-#  printf "\n"
-#fi
-
-#if [ -f "$mpgout" ]; then
-#  printf "\n"
-#  echo "Stage 2 (to AVI), processing $mpgout to $aviout"
-#  printf "\n"
-#  ffmpeg -y -i "$mpgout" -vtag DIVX -f avi -vcodec mpeg4 -aspect $aspect -s $ssize -b:v $videobitrate -acodec libmp3lame -b:a 128000 -ar 44100 -ac 2 "$aviout"
-#  printf "\n"
-#fi
 
 ffmpeg -y -i "$filename" -aspect $aspect -target pal-dvd -vcodec copy -acodec copy - | ffmpeg -y -i - -vtag DIVX -f avi -vcodec mpeg4 -aspect $aspect -s $ssize -b:v $videobitrate -acodec libmp3lame -b:a 128000 -ar 44100 -ac 2 "$aviout"
+
 
