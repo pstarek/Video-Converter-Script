@@ -57,6 +57,5 @@ filenamewithoutext="${filename%%.*}"
 aviext=".avi"
 aviout="$filenamewithoutext$aviext"
 
-ffmpeg -y -i "$filename" -aspect $aspect -target pal-dvd -vcodec copy -acodec copy - | ffmpeg -y -i - -vtag DIVX -f avi -vcodec mpeg4 -aspect $aspect -s $ssize -b:v $videobitrate -acodec libmp3lame -b:a 128000 -ar 44100 -ac 2 "$aviout"
-
+ffmpeg -y -i "$filename" -aspect $aspect -target pal-dvd -vcodec copy -acodec copy 2>/dev/null - | ffmpeg -y -i - -vtag DIVX -f avi -vcodec mpeg4 -aspect $aspect -s $ssize -b:v $videobitrate -acodec libmp3lame -b:a 128000 -ar 44100 -ac 2 "$aviout"
 
