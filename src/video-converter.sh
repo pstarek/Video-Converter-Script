@@ -20,7 +20,7 @@ fi
 
 if [[ $2 == "16" || $2 == "16:9" ]]; then
   aspect=16:9
-  ssize=640x360
+  ssize=720x404
   printf "\n"
   echo "16:9 mode"
   printf "\n"
@@ -28,7 +28,7 @@ fi
 
 if [[ $2 == "4" || $2 == "4:3" ]]; then
   aspect=4:3
-  ssize=640x480
+  ssize=720x540
   printf "\n"
   echo "4:3 mode"
   printf "\n"
@@ -45,10 +45,10 @@ if [ ! $2 ]; then
   printf "\n"
   case "$aspect" in
     16:9)
-      ssize=640x360
+      ssize=720x404
       ;;
     4:3)
-      ssize=640x480
+      ssize=720x540
       ;;
   esac
 fi
@@ -58,4 +58,3 @@ aviext=".avi"
 aviout="$filenamewithoutext$aviext"
 
 ffmpeg -y -i "$filename" -aspect $aspect -target pal-dvd -vcodec copy -acodec copy 2>/dev/null - | ffmpeg -y -i - -vtag DIVX -f avi -vcodec mpeg4 -aspect $aspect -s $ssize -b:v $videobitrate -acodec libmp3lame -b:a 128000 -ar 44100 -ac 2 "$aviout"
-
